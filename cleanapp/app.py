@@ -3,13 +3,15 @@ from datetime import date
 from dash import dcc, html
 from dash.dependencies import Input, Output
 from cleanapp import sheets, helpers
+import flask
 
 sheet, records = sheets.get_sheet()
 
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
+server = flask.Flask(__name__)
+
+app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True)
 
 app.layout = html.Div([
-    # html.Img(id='cleanapp-img', src='assets/app_icon.jpeg'),
     html.H1("Clean App"),
     html.Div([html.H3("Select your name:"),
               dcc.Dropdown(
@@ -62,4 +64,4 @@ def update_chore(submit_button, undo_button, person_name):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
