@@ -1,28 +1,35 @@
 from cleanapp.config import COLUMNS_ITERABLE
 
 
-def get_week(date):
-    return date.isocalendar()[1]
-
-
-def find_chore(sheets_df, date, person_name):
-    week_no = get_week(date)
+def get_chore_row(sheet_df, date):
+    week_no = date.isocalendar()[1]
     try:
-        chore_row = sheets_df.loc[week_no]
+        return sheet_df.loc[week_no]
     except IndexError as e:
-        raise (f'The week number of {week_no} is not found in the sheet.') from e
+        raise (f"The week number of {week_no} is not found in the sheet.") from e
 
+
+def find_chore(sheet_df, date, person_name):
+    chore_row = get_chore_row(sheet_df, date)
     for location in COLUMNS_ITERABLE:
         if person_name == chore_row[location].lower():
             return " ".join(location.split("_")).capitalize()
 
 
+def find_outcome(sheet_df, date, person_name):
+    chore_row = get_chore_row(sheet_df, date)
+    try:
+        return chore_row[person_name]
+    except IndexError as e:
+        raise (f"{person_name} is an invalid name.") from e
+
+
 def update_value(sheet, sheet_df, date, person_name, value=1):
-    week_no = get_week(date)
+    week_no = date.isocalendar()[1]
     try:
         sheet_df.at[week_no, person_name] = value
     except IndexError as e:
-        raise (f'The week number of {week_no} is not found in the sheet.') from e
+        raise (f"The week number of {week_no} is not found in the sheet.") from e
 
     update_sheet(sheet, sheet_df)
 

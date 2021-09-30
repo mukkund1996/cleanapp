@@ -9,7 +9,7 @@ from cleanapp.config import CLEANING_MASTER_SHEET, CREDENTIALS_PATH
 @retry(HTTPError, tries=3, delay=2)
 def get_sheet(sheet_name=CLEANING_MASTER_SHEET, credentials=CREDENTIALS_PATH):
     # define the scope
-    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
     # add credentials to the account
     creds = ServiceAccountCredentials.from_json_keyfile_name(credentials, scope)
@@ -25,6 +25,6 @@ def get_sheet(sheet_name=CLEANING_MASTER_SHEET, credentials=CREDENTIALS_PATH):
 
     records = sheet_instance.get_all_records()
 
-    records_df = pd.DataFrame.from_dict(records).set_index('week_no')
+    records_df = pd.DataFrame.from_dict(records).set_index("week_no")
 
     return sheet_instance, records_df

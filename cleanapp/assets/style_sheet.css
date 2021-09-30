@@ -1,0 +1,34 @@
+.center-elements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inline-items{
+    width: 35em;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.dropdown{
+    width: 9em;
+}
+
+.button-style{
+    height: 2.5em;
+    border-radius: 0.5em;
+}
+
+.sections{
+    background: #e3e3e3;
+    border-radius: 5px;
+}
+
+#parent-div > *{
+    padding: 0.5% 0%;
+}
+
+body{
+    font-family: Sans-Serif;
+}
