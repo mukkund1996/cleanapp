@@ -11,7 +11,14 @@ current_date = date.today()
 
 server = flask.Flask(__name__)
 
-app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True)
+app = dash.Dash(
+    __name__,
+    server=server,
+    suppress_callback_exceptions=True,
+    external_stylesheets=[config.CSS_LINK],
+)
+
+app.scripts.config.serve_locally = False
 
 app.layout = html.Div([
     html.H1("Clean App"),

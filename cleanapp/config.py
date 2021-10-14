@@ -13,3 +13,5 @@ COLUMNS_ITERABLE = ("living_room", "kitchen", "bathroom_&_toilet", "trash_&_groc
 PERSONS_TUPLE = ("mukkund", "sharanya", "giovanni", "shyam")
 
 BG_COLORS = ["#ADD9F4", "#984447"]
+
+CSS_LINK = "https://mukkund1996.github.io/cleanapp/docs/assets/style_sheet.css"
